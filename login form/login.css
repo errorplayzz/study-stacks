@@ -1,0 +1,509 @@
+@import url(
+"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+ 
+body {
+    height: 130vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    background-color: rgb(231, 231, 231);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(./background\ image.webp);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shine {
+    0% { background-position: -100px; }
+    40%, 100% { background-position: 500px; }
+}
+
+.header{
+    display: flex;
+    margin-bottom: 50px;
+    animation: fadeInUp 1s ease;
+ }
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    width: 1000px;
+    height: 100px;
+    border: none;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #3498db, #2ecc71, #f1c40f, #e74c3c, #9b59b6);
+    background-size: 500% 500%;
+    animation: gradientMove 10s ease infinite;
+}
+
+header:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+ 
+.heading {
+    color: #2c3e50;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: 1px;
+    position: relative;
+    animation: fadeIn 1.2s ease;
+}
+
+.heading::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, #3498db, #8e44ad);
+    border-radius: 3px;
+}
+ 
+.title {
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 17px;
+    color: #34495e;
+    animation: fadeIn 1.5s ease;
+}
+
+.header .backbutton{
+    margin-left: 150px;
+    margin-top: 10px;
+    position: absolute;
+    right: 20px;
+    animation: fadeIn 1.8s ease;
+ }
+ .header .backbutton a{
+    cursor: pointer;
+    transition: all 0.3s ease;
+ }
+ .header .backbutton a:hover {
+    transform: scale(1.1) rotate(90deg);
+ }
+ .header .backbutton a i{
+    padding: 15px;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+ }
+
+ .header .backbutton a i:hover {
+    background: linear-gradient(45deg, #2980b9, #3498db);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+ }
+
+.container {
+    height: 600px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    animation: fadeInUp 1.5s ease;
+    transition: all 0.3s ease;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: 0;
+    background: radial-gradient(rgba(52, 152, 219, 0.05) 10%, transparent 10.5%), 
+                radial-gradient(rgba(52, 152, 219, 0.05) 10%, transparent 10.5%);
+    background-position: 0 0, 20px 20px;
+    background-size: 40px 40px;
+    animation: rotate 120s linear infinite;
+    opacity: 0.5;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+ 
+.btn {
+    height: 60px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.8s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
+    transform: translateY(-3px);
+}
+ 
+.login,
+.signup {
+    font-size: 22px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: 600;
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.login:hover,
+.signup:hover {
+    color: #ffffff;
+}
+ 
+.slider {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #3498db, #9b59b6);
+    background-size: 200% 200%;
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 2;
+    animation: gradientMove 5s infinite alternate;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+ 
+.moveslider {
+    left: 250px;
+}
+ 
+.form-section {
+    height: 500px;
+    width: 1000px;
+    padding: 20px 0;
+    display: flex;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    left: 0px;
+    z-index: 2;
+}
+ 
+.form-section-move {
+    left: -500px;
+}
+ 
+.login-box,
+.signup-box {
+    height: 100%;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 40px;
+    position: relative;
+}
+ 
+.login-box {
+    gap: 50px;
+    animation: fadeIn 0.5s ease;
+}
+ 
+.signup-box {
+    gap: 30px;
+    animation: fadeIn 0.5s ease;
+}
+ 
+.ele {
+    height: 60px;
+    width: 400px;
+    outline: none;
+    border: none;
+    color: #2c3e50;
+    background-color: rgb(240, 240, 240);
+    border-radius: 50px;
+    padding-left: 30px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.ele:focus {
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
+}
+ 
+.clkbtn {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #3498db, #9b59b6);
+    background-size: 200% 200%;
+    animation: gradientMove 5s infinite alternate;
+    font-size: 22px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.clkbtn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.8s;
+    opacity: 0;
+}
+
+.clkbtn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.clkbtn:hover::after {
+    animation: shine 1.5s;
+    opacity: 1;
+}
+ 
+/* For Responsiveness of the page */
+ 
+@media screen and (max-width: 650px) {
+    .header {
+        margin-bottom: 30px;
+    }
+    
+    header {
+        width: 90%;
+        max-width: 500px;
+    }
+    
+    .container {
+        height: 600px;
+        width: 90%;
+        max-width: 300px;
+    }
+ 
+    .title {
+        font-size: 15px;
+    }
+ 
+    .btn {
+        height: 50px;
+        width: 200px;
+        margin: 20px auto;
+    }
+ 
+    .login,
+    .signup {
+        font-size: 19px;
+    }
+ 
+    .slider {
+        height: 50px;
+        width: 100px;
+        left: 50px;
+    }
+ 
+    .moveslider {
+        left: 150px;
+    }
+ 
+    .form-section {
+        height: 500px;
+        width: 600px;
+    }
+ 
+    .form-section-move {
+        left: -300px;
+    }
+ 
+    .login-box,
+    .signup-box {
+        height: 100%;
+        width: 300px;
+    }
+ 
+    .ele {
+        height: 50px;
+        width: 250px;
+        font-size: 15px;
+    }
+ 
+    .clkbtn {
+        height: 50px;
+        width: 130px;
+        font-size: 19px;
+    }
+}
+ 
+@media screen and (max-width: 320px) {
+    .header {
+        margin-bottom: 20px;
+    }
+    
+    header {
+        width: 90%;
+        max-width: 280px;
+        height: 80px;
+    }
+    
+    .heading {
+        font-size: 24px;
+    }
+    
+    .title {
+        font-size: 12px;
+    }
+    
+    .container {
+        height: 520px;
+        width: 90%;
+        max-width: 250px;
+    }
+ 
+    .btn {
+        height: 40px;
+        width: 180px;
+        margin: 15px auto;
+    }
+ 
+    .login,
+    .signup {
+        font-size: 16px;
+    }
+ 
+    .slider {
+        height: 40px;
+        width: 90px;
+        left: 45px;
+    }
+ 
+    .moveslider {
+        left: 135px;
+    }
+ 
+    .form-section {
+        height: 450px;
+        width: 500px;
+    }
+ 
+    .form-section-move {
+        left: -250px;
+    }
+ 
+    .login-box,
+    .signup-box {
+        height: 100%;
+        width: 250px;
+    }
+ 
+    .ele {
+        height: 40px;
+        width: 220px;
+        font-size: 13px;
+        padding-left: 20px;
+    }
+ 
+    .clkbtn {
+        height: 45px;
+        width: 120px;
+        font-size: 17px;
+    }
+}
