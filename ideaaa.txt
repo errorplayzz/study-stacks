@@ -1,0 +1,13 @@
+1. more better open letter.
+2. chatbot 
+3. right navbar
+4. better background on course
+5. pyq must have year 
+6. website must have coding section
+7. student easy to connect with teacher without any leaks
+8. sylabus section with semester
+9. time and date in website
+10. feedback section
+11. Clean and Responsive Design
+12. Visual Enhancements
+13. trasition between course
