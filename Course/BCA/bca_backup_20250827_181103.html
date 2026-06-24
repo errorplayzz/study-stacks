@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDY STACKS - BCA</title>
+    <link rel="stylesheet" href="./bca.css">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Navigation */
+        .navigationbar {
+            background: #2c3e50;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .firstnav, .secondnav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .secondnav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .secondnav a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main Content */
+        .main {
+            text-align: center;
+            padding: 100px 15px 40px;
+            color: white;
+            margin-bottom: 15px;
+            background-color: #ffffff;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('../../background image.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main h1 {
+            font-size: 1.7em;
+            margin: 0 0 5px 0;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .main p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Selection Containers */
+        .select1 {
+            max-width: 1000px;
+            margin: 20px auto 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .titles {
+            font-size: 1.6em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .titles:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #3498db;
+            border-radius: 3px;
+        }
+
+        /* Year Selection - Horizontal Layout */
+        .year {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .year-option {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .year-option p {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .year-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #3498db;
+            background: white;
+        }
+
+        /* Semester and Subject Options */
+        .semester-option, .subject-option {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .subject-option {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .subject-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #e9f7fe;
+            color: #0c5460;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .content-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .content-type {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .content-type:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .content-type h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+        }
+
+        .content-type p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .units-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .unit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .unit:hover {
+            background: #e9f7fe;
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+        }
+
+        .semester-option p, .subject-option p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .semester-option:hover, .subject-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .back-button:hover {
+            background: #e9ecef;
+            text-decoration: none;
+            transform: translateX(-3px);
+        }
+
+        /* Footer */
+        .footers {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 5px solid #3498db;
+        }
+
+        .footers .word {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        .footers a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footers a:hover {
+            color: #3498db;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .year, .semester-options, .subject-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .year-option, .semester-option, .subject-option {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .main h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navigationbar">
+        <div class="firstnav">
+            <div class="image"><a href="../../index.html"><img src="../../study_stacks_3__1_-removebg-preview.png" alt="STUDY STACKS"></a></div>
+        </div>
+        <div class="secondnav">
+            <div class="courseh"><a href="../../index.html#braches"><i class="fa-solid fa-magnifying-glass"></i> Course</a></div>
+            <div class="procourseh"><a href="../../index.html#probraches"><i class="fa-solid fa-code"></i> Coding Course</a></div>
+            <div class="assingment"><a href="../../login form/login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Bachelor of Computer Application</h1>
+        <p>Select a year to begin exploring course materials</p>
+    </div>
+
+    <!-- Year Selection -->
+    <div class="select1" id="year-selection">
+        <div class="titles">Select Your Academic Year</div>
+        <div class="year">
+            <div class="year-option" data-year="1">
+                <p>1st Year</p>
+                <small>First Year Courses</small>
+            </div>
+            <div class="year-option" data-year="2">
+                <p>2nd Year</p>
+                <small>Second Year Courses</small>
+            </div>
+            <div class="year-option" data-year="3">
+                <p>3rd Year</p>
+                <small>Final Year Courses</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Semester Selection (initially hidden) -->
+    <div class="select1 select2" id="semester-selection" style="display: none;">
+        <div class="titles">Select Semester</div>
+        <div class="year" id="semester-container">
+            <!-- Semesters will be populated by JavaScript -->
+        </div>
+        <div class="back-button" id="back-to-years">← Back to Years</div>
+    </div>
+
+    <!-- Subject Selection (initially hidden) -->
+    <div class="select1" id="subject-selection" style="display: none;">
+        <div class="titles" id="subject-title">Select Subject</div>
+        <div class="year" id="subject-container">
+            <!-- Subjects will be populated by JavaScript -->
+        </div>
+        <div class="back-button" id="back-to-semesters">← Back to Semesters</div>
+    </div>
+    </div>
+</div>
+
+<!-- CPF what you want  -->
+
+<div class="select1 want1" id="want1">
+    <div class="titles">CPF - Select What You Want</div>
+    <div class="year">
+        <a href="#notes1"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes2"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes3"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- CPF Notes unit  -->
+
+<div class="select1 notes1" id="notes1">
+    <div class="titles">CPF - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/cpf unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/cpf unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/cpf unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/cpf unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- CPF Notes Assingment  -->
+
+<div class="select1 notes2" id="notes2">
+    <div class="titles">CPF - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/cpf assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/cpf assingmrnt 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+    </div>
+</div>
+
+<!-- CPF Notes PYQ  -->
+
+<div class="select1 notes3" id="notes3">
+    <div class="titles">CPF - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 1/cpf paper 1.pdf" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+    </div>
+</div>
+
+<!-- PC what you want  -->
+
+<div class="select1 want2" id="want2">
+    <div class="titles">PC - Select What You Want</div>
+    <div class="year">
+        <a href="#notes4"><div class="1" ><p>Notes</p></div></a>
+        <a href="#notes5"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes6"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- PC Notes unit  -->
+
+<div class="select1 notes4" id="notes4">
+    <div class="titles">PC - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/pc unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/pc unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/pc unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/pc unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- PC Notes Assingment  -->
+
+<div class="select1 notes5" id="notes5">
+    <div class="titles">PC - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/pc assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+    </div>
+</div>
+
+<!-- PC Notes PYQ  -->
+
+<div class="select1 notes6" id="notes6">
+    <div class="titles">PC - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 1/pc paper 1 2019.pdf" target="_blank"><div class="1"><p>Paper 2019</p></div></a>
+        <a href="./sem 1/pc paper 2 2018.pdf" target="_blank"><div class="2"><p>Paper 2018</p></div></a>
+        <a href="./sem 1/pc paper 3 2021.pdf" target="_blank"><div class="3"><p>Paper 2021</p></div></a>
+        <a href="./sem 1/pc paper 4 2022.pdf" target="_blank"><div class="3"><p>Paper 2022</p></div></a>
+    </div>
+</div>
+
+
+<!-- Maths what you want  -->
+
+<div class="select1 want3" id="want3">
+    <div class="titles">Maths - Select What You Want</div>
+    <div class="year">
+        <a href="#notes7"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes8"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes9"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes unit  -->
+
+<div class="select1 notes7" id="notes7">
+    <div class="titles">Maths - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/maths unit1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/maths unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/maths unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/maths unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes Assingment  -->
+
+<div class="select1 notes8" id="notes8">
+    <div class="titles">Maths - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/maths assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/maths assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/maths assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/maths assingment 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes PYQ  -->
+
+<div class="select1 notes9" id="notes9">
+    <div class="titles">Maths - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 1/maths paper 1 2022.pdf" target="_blank"><div class="1"><p>Paper 2022</p></div></a>
+        <a href="./sem 1/maths paper 2 2019.pdf" target="_blank"><div class="2"><p>Paper 2019</p></div></a>
+        <a href="./sem 1/maths paper 3 2018.pdf" target="_blank"><div class="3"><p>Paper 2018</p></div></a>
+        <a href="./sem 1/maths paper 4 2017.pdf" target="_blank"><div class="3"><p>Paper 2017</p></div></a>
+    </div>
+</div>
+
+
+<!-- LOC-1 what you want  -->
+
+<div class="select1 want4" id="want4">
+    <div class="titles">LOC-I - Select What You Want</div>
+    <div class="year">
+        <a href="#notes10"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes11"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes12"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-1 Notes unit  -->
+
+<div class="select1 notes10" id="notes10">
+    <div class="titles">LOC-I - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/loc unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/loc unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/loc unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/loc unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-1 Notes Assingment  -->
+
+<div class="select1 notes11" id="notes11">
+    <div class="titles">LOC-I - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 1/loc assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 1/loc assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 1/loc assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 1/loc assingment 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-1 Notes PYQ  -->
+
+<div class="select1 notes12" id="notes12">
+    <div class="titles">LOC-I - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 1/loc paper 1 2022.pdf" target="_blank"><div class="1"><p>Paper 2022</p></div></a>
+    </div>
+</div>
+
+
+<!-- 2 Program -->
+
+<div class="select1 sem2" id="set4">
+    <div class="titles">Semester 2 - Select Program</div>
+    <div class="year">
+        <a href="#want5"><div class="1"><p>C Program</p></div></a>
+        <a href="#want6"><div class="2"><p>LOC-II</p></div></a>
+        <a href="#want7"><div class="3"><p>Maths</p></div></a>
+        <a href="#want8"><div class="4"><p>SSAD</p></div></a>
+    </div>
+</div>
+
+<!-- C Program what you want  -->
+
+<div class="select1 want5" id="want5">
+    <div class="titles">C Program - Select What You Want</div>
+    <div class="year">
+        <a href="#notes13"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes14"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes15"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- C Notes unit  -->
+
+<div class="select1 notes13" id="notes13">
+    <div class="titles">C Program - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/c unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/c unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/c unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/c unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- C Notes Assingment  -->
+
+<div class="select1 notes14" id="notes14">
+    <div class="titles">C Program - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/c assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/c assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/c assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/c assingment 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- C Notes PYQ  -->
+
+<div class="select1 notes15" id="notes15">
+    <div class="titles">C Program - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 2/c paper 1 2018.pdf" target="_blank"><div class="1"><p>Paper 2018</p></div></a>
+        <a href="./sem 2/c paper 2 2019.pdf" target="_blank"><div class="2"><p>Paper 2019</p></div></a>
+        <a href="./sem 2/c paper 3 2017.pdf" target="_blank"><div class="3"><p>Paper 2017</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-II what you want  -->
+
+<div class="select1 want6" id="want6">
+    <div class="titles">LOC-II - Select What You Want</div>
+    <div class="year">
+        <a href="#notes16"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes17"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes18"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-II Notes unit  -->
+
+<div class="select1 notes16" id="notes16">
+    <div class="titles">LOC-II - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/loc unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/loc unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/loc unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/loc unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-II Notes Assingment  -->
+
+<div class="select1 notes17" id="notes17">
+    <div class="titles">LOC-II - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unavailable</p></div></a>
+    </div>
+</div>
+
+<!-- LOC-II Notes PYQ  -->
+
+<div class="select1 notes18" id="notes18">
+    <div class="titles">LOC-II - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 2/loc paper 1 2018.pdf" target="_blank"><div class="1"><p>Paper 2018</p></div></a>
+        <a href="./sem 2/loc paper 2 2019.pdf" target="_blank"><div class="2"><p>Paper 2019</p></div></a>
+    </div>
+</div>
+
+<!-- Maths what you want  -->
+
+<div class="select1  want7" id="want7">
+    <div class="titles">Maths - Select What You Want</div>
+    <div class="year">
+        <a href="#notes19"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes20"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes21"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes unit  -->
+
+<div class="select1 notes19" id="notes19">
+    <div class="titles">Maths - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/maths unit 1.pdf"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/maths unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/maths unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/maths unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes Assingment  -->
+
+<div class="select1 notes20" id="notes20">
+    <div class="titles">Maths - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/maths assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+    </div>
+</div>
+
+<!-- Maths Notes PYQ  -->
+
+<div class="select1 notes21" id="notes21">
+    <div class="titles">Maths - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 2/maths paper 1 2017.pdf" target="_blank"><div class="1"><p>Paper 2017</p></div></a>
+        <a href="./sem 2/maths paper 2 2018.pdf" target="_blank"><div class="2"><p>Paper 2018</p></div></a>
+        <a href="./sem 2/maths paper 3 2020.pdf" target="_blank"><div class="3"><p>Paper 2020</p></div></a>
+        <a href="./sem 2/maths paper 4 2023.pdf" target="_blank"><div class="3"><p>Paper 2023</p></div></a>
+    </div>
+</div>
+
+<!-- SSAD what you want  -->
+
+<div class="select1  want8" id="want8">
+    <div class="titles">SSAD - Select What You Want</div>
+    <div class="year">
+        <a href="#notes22"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes23"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes24"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- SSAD Notes unit  -->
+
+<div class="select1 notes22" id="notes22">
+    <div class="titles">SSAD - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/ssad unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/ssad unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/ssad unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/ssad unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- SSAD Notes Assingment  -->
+
+<div class="select1 notes23" id="notes23">
+    <div class="titles">SSAD - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 2/ssad assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 2/ssad assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 2/ssad assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 2/ssad assingment 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- SSAD Notes PYQ  -->
+
+<div class="select1 notes24" id="notes24">
+    <div class="titles">SSAD - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 2/ssad paper 1 2019.pdf" target="_blank"><div class="1"><p>Paper 2019</p></div></a>
+        <a href="./sem 2/ssad paper 2 2023.pdf" target="_blank"><div class="2"><p>Paper 2023</p></div></a>
+        <a href="./sem 2/ssad paper 3 2020.pdf" target="_blank"><div class="3"><p>Paper 2020</p></div></a>
+        <a href="./sem 2/ssad paper 4 2018.pdf" target="_blank"><div class="3"><p>Paper 2018</p></div></a>
+    </div>
+</div>
+
+
+<!-- 2 Semester -->
+
+<div class="select1 select3"  id="sem2">
+    <div class="titles">2nd Year - Select Semester</div>
+    <div class="year">
+        <a href="#set5">
+            <div class="year-card">
+                <p>Sem 3</p>
+                <img src="../button wallpaper.jpg" alt="Semester 3">
+            </div>
+        </a>
+        <a href="#set6">
+            <div class="year-card">
+                <p>Sem 4</p>
+                <img src="../button wallpaper.jpg" alt="Semester 4">
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 3 Program -->
+
+<div class="select1 sem3" id="set5">
+    <div class="titles">Semester 3 - Select Program</div>
+    <div class="year">
+        <a href="#want9"><div class="1"><p>OS</p></div></a>
+        <a href="#want10"><div class="2"><p>DS-I</p></div></a>
+        <a href="#want11"><div class="3"><p>DBS</p></div></a>
+        <a href="#want12"><div class="4"><p>CS (English)</p></div></a>
+    </div>
+</div>
+
+<!-- OS what you want  -->
+
+<div class="select1  want9" id="want9">
+    <div class="titles">OS - Select What You Want</div>
+    <div class="year">
+        <a href="#notes25"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes26"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes27"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- OS Notes unit  -->
+
+<div class="select1 notes25" id="notes25">
+    <div class="titles">OS - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 3/Operating Sys Unit-1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- OS Notes Assingment  -->
+
+<div class="select1 notes26" id="notes26">
+    <div class="titles">OS - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- OS Notes PYQ  -->
+
+<div class="select1 notes27" id="notes27">
+    <div class="titles">OS - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="./sem 3/OS paper 1 2023.pdf" target="_blank"><div class="1"><p>Paper 2023</p></div></a>
+        <a href="./sem 3/OS paper 2 2022.pdf" target="_blank"><div class="2"><p>Paper 2022</p></div></a>
+    </div>
+</div>
+
+<!-- DS-I what you want  -->
+
+<div class="select1  want10" id="want10">
+    <div class="titles">DS-I - Select What You Want</div>
+    <div class="year">
+        <a href="#notes28"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes29"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes30"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- DS-I Notes unit  -->
+
+<div class="select1 notes28" id="notes28">
+    <div class="titles">DS-I - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DS-I Notes Assingment  -->
+
+<div class="select1 notes29" id="notes29">
+    <div class="titles">DS-I - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DS-I Notes PYQ  -->
+
+<div class="select1 notes30" id="notes30">
+    <div class="titles">DS-I - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- DBS what you want  -->
+
+<div class="select1  want11" id="want11">
+    <div class="titles">DBS - Select What You Want</div>
+    <div class="year">
+        <a href="#notes31"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes32"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes33"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- DBS Notes unit  -->
+
+<div class="select1 notes31" id="notes31">
+    <div class="titles">DBS - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 3/DBMS UNIT-1 NOTES.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 3/DBMS UNIT-2 NOTES.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 3/DBMS UNIT-3 NOTES.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 3/DBMS UNIT-4 NOTES.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DBS Notes Assingment  -->
+
+<div class="select1 notes32" id="notes32">
+    <div class="titles">DBS - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 3/DB Assignment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 3/DBMS Assignment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+    </div>
+</div>
+
+<!-- DBS Notes PYQ  -->
+
+<div class="select1 notes33" id="notes33">
+    <div class="titles">DBS - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- CS (English) what you want  -->
+
+<div class="select1  want12" id="want12">
+    <div class="titles">CS (English) - Select What You Want</div>
+    <div class="year">
+        <a href="#notes34"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes35"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes36"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- CS (English) Notes unit  -->
+
+<div class="select1 notes34" id="notes34">
+    <div class="titles">CS (English) - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 3/CS unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a> -->
+        <a href="./sem 3/CS unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- CS (English) Notes Assingment  -->
+
+<div class="select1 notes35" id="notes35">
+    <div class="titles">CS (English) - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 3/CS assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 3/CS assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- CS (English) Notes PYQ  -->
+
+<div class="select1 notes36" id="notes36">
+    <div class="titles">CS (English) - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- 4 Program -->
+
+<div class="select1 sem4" id="set6">
+    <div class="titles">Semester 4 - Select Program</div>
+    <div class="year">
+        <a href="#want13">
+            <div class="year-card">
+                <p>WD</p>
+                <img src="../button wallpaper.jpg" alt="WD">
+            </div>
+        </a>
+        <a href="#want14">
+            <div class="year-card">
+                <p>DS-II</p>
+                <img src="../button wallpaper.jpg" alt="DS-II">
+            </div>
+        </a>
+        <a href="#want15">
+            <div class="year-card">
+                <p>C++ Program</p>
+                <img src="../button wallpaper.jpg" alt="C++ Program">
+            </div>
+        </a>
+        <a href="#want16">
+            <div class="year-card">
+                <p>SE</p>
+                <img src="../button wallpaper.jpg" alt="SE">
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- WD what you want  -->
+
+<div class="select1  want13" id="want13">
+    <div class="titles">WD - Select What You Want</div>
+    <div class="year">
+        <a href="#notes37"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes38"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes39"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- WD Notes unit  -->
+
+<div class="select1 notes37" id="notes37">
+    <div class="titles">WD - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/WD unit (1).pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 4/WD unit (2).pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- WD Notes Assingment  -->
+
+<div class="select1 notes38" id="notes38">
+    <div class="titles">WD - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/WD assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 4/WD assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- WD Notes PYQ  -->
+
+<div class="select1 notes39" id="notes39">
+    <div class="titles">WD - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- DS-II what you want  -->
+
+<div class="select1  want14" id="want14">
+    <div class="titles">DS-II - Select What You Want</div>
+    <div class="year">
+        <a href="#notes40"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes41"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes42"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- DS-II Notes unit  -->
+
+<div class="select1 notes40" id="notes40">
+    <div class="titles">DS-II - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/DS-II UNIT - 1.docx.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 4/DS-II UNIT - 2.docx.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 4/DS-II UNIT - 3 (FULL).docx.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 4/DS-II UNIT - 4.docx.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DS-II Notes Assingment  -->
+
+<div class="select1 notes41" id="notes41">
+    <div class="titles">DS-II - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DS-II Notes PYQ  -->
+
+<div class="select1 notes42" id="notes42">
+    <div class="titles">DS-II - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- C++ Program what you want  -->
+
+<div class="select1  want15" id="want15">
+    <div class="titles">C++ Program - Select What You Want</div>
+    <div class="year">
+        <a href="#notes43"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes44"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes45"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- C++ Program Notes unit  -->
+
+<div class="select1 notes43" id="notes43">
+    <div class="titles">C++ Program - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/OOP unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 4/OOP unit 2 (2).pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 4/OOPs Unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 4/OOp unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- C++ Program Notes Assingment  -->
+
+<div class="select1 notes44" id="notes44">
+    <div class="titles">C++ Program - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/oop assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- C++ Program Notes PYQ  -->
+
+<div class="select1 notes45" id="notes45">
+    <div class="titles">C++ Program - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- SE what you want  -->
+
+<div class="select1 want16" id="want16">
+    <div class="titles">SE - Select What You Want</div>
+    <div class="year">
+        <a href="#notes46"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes47"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes48"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- SE Notes unit  -->
+
+<div class="select1 notes46" id="notes46">
+    <div class="titles">SE - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/SE Unit 1 Notes.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a> -->
+        <a href="./sem 4/SE Unit 3 Notes.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 4/SE Unit 4 Notes.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- SE Notes Assingment  -->
+
+<div class="select1 notes47" id="notes47">
+    <div class="titles">SE - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 4/SE assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 4/SE assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- SE Notes PYQ  -->
+
+<div class="select1 notes48" id="notes48">
+    <div class="titles">SE - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- 3 Semester -->
+
+<div class="select1 select4"  id="sem3">
+    <div class="titles">3rd Year - Select Semester</div>
+    <div class="year">
+        <a href="#set7">
+            <div class="year-card">
+                <p>Sem 5</p>
+                <img src="../button wallpaper.jpg" alt="Semester 5">
+            </div>
+        </a>
+        <a href="#set8">
+            <div class="year-card">
+                <p>Sem 6</p>
+                <img src="../button wallpaper.jpg" alt="Semester 6">
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 5 Program -->
+
+<div class="select1 sem5" id="set7">
+    <div class="titles">Semester 5 - Select Program</div>
+    <div class="year">
+        <a href="#want17"><div class="1"><p>MIS</p></div></a>
+        <a href="#want18"><div class="2"><p>CG</p></div></a>
+        <a href="#want19"><div class="3"><p>DCN</p></div></a>
+        <a href="#want20"><div class="4"><p>VB</p></div></a>
+    </div>
+</div>
+
+<!-- MIS what you want  -->
+
+<div class="select1 want17" id="want17">
+    <div class="titles">MIS - Select What You Want</div>
+    <div class="year">
+        <a href="#notes49"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes50"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes51"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- MIS Notes unit  -->
+
+<div class="select1 notes49" id="notes49">
+    <div class="titles">MIS - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/MIS unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a> -->
+        <a href="./sem 5/MIS_Unit-3 BCA 5th.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 5/MIS 4th unit.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- MIS Notes Assingment  -->
+
+<div class="select1 notes50" id="notes50">
+    <div class="titles">MIS - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/MIS assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- MIS Notes PYQ  -->
+
+<div class="select1 notes51" id="notes51">
+    <div class="titles">MIS - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- CG what you want  -->
+
+<div class="select1 want18" id="want18">
+    <div class="titles">CG - Select What You Want</div>
+    <div class="year">
+        <a href="#notes52"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes53"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes54"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- CG Notes unit  -->
+
+<div class="select1 notes52" id="notes52">
+    <div class="titles">CG - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- CG Notes Assingment  -->
+
+<div class="select1 notes53" id="notes53">
+    <div class="titles">CG - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- CG Notes PYQ  -->
+
+<div class="select1 notes54" id="notes54">
+    <div class="titles">CG - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- DCN what you want  -->
+
+<div class="select1 want19" id="want19">
+    <div class="titles">DCN - Select What You Want</div>
+    <div class="year">
+        <a href="#notes55"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes56"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes57"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- DCN Notes unit  -->
+
+<div class="select1 notes55" id="notes55">
+    <div class="titles">DCN - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/DCN unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 5/DCN unit 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 5/DCN unit 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 5/DCN unit 4.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- DCN Notes Assingment  -->
+
+<div class="select1 notes56" id="notes56">
+    <div class="titles">DCN - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/DCN Assignment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 5/DCN assingment 2.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- DCN Notes PYQ  -->
+
+<div class="select1 notes57" id="notes57">
+    <div class="titles">DCN - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- VB what you want  -->
+
+<div class="select1 want20" id="want20">
+    <div class="titles">VB - Select What You Want</div>
+    <div class="year">
+        <a href="#notes58"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes59"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes60"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- VB Notes unit  -->
+
+<div class="select1 notes58" id="notes58">
+    <div class="titles">VB - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/VB unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a> -->
+        <a href="./sem 5/VB assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- VB Notes Assingment  -->
+
+<div class="select1 notes59" id="notes59">
+    <div class="titles">VB - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 5/VB assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a> -->
+        <a href="./sem 5/VB assingment 3.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <!-- <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- VB Notes PYQ  -->
+
+<div class="select1 notes60" id="notes60">
+    <div class="titles">VB - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- 6 Program -->
+
+<div class="select1 sem6" id="set8">
+    <div class="titles">Semester 6 - Select Program</div>
+    <div class="year">
+        <a href="#want21"><div class="1"><p>E-Commerce</p></div></a>
+        <a href="#want22"><div class="2"><p>JAVA</p></div></a>
+        <a href="#want23"><div class="3"><p>AI</p></div></a>
+        <a href="#want24"><div class="4"><p>.NET</p></div></a>
+    </div>
+</div>
+
+<!-- E-Commerce what you want  -->
+
+<div class="select1 want21" id="want21">
+    <div class="titles">E-Commerce - Select What You Want</div>
+    <div class="year">
+        <a href="#notes61"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes62"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes63"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- E-Commerce Notes unit  -->
+
+<div class="select1 notes61" id="notes61">
+    <div class="titles">E-Commerce - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 6/e-com Unit 1 Notes.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- E-Commerce Notes Assingment  -->
+
+<div class="select1 notes62" id="notes62">
+    <div class="titles">E-Commerce - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 6/e-com assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- E-Commerce Notes PYQ  -->
+
+<div class="select1 notes63" id="notes63">
+    <div class="titles">E-Commerce - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- JAVA what you want  -->
+
+<div class="select1 want22" id="want22">
+    <div class="titles">JAVA - Select What You Want</div>
+    <div class="year">
+        <a href="#notes64"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes65"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes66"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- JAVA Notes unit  -->
+
+<div class="select1 notes64" id="notes64">
+    <div class="titles">JAVA - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- JAVA Notes Assingment  -->
+
+<div class="select1 notes65" id="notes65">
+    <div class="titles">JAVA - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- JAVA Notes PYQ  -->
+
+<div class="select1 notes66" id="notes66">
+    <div class="titles">JAVA - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- AI what you want  -->
+
+<div class="select1 want23" id="want23">
+    <div class="titles">AI - Select What You Want</div>
+    <div class="year">
+        <a href="#notes67"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes68"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes69"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- AI Notes unit  -->
+
+<div class="select1 notes67" id="notes67">
+    <div class="titles">AI - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 6/AI unit 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- AI Notes Assingment  -->
+
+<div class="select1 notes68" id="notes68">
+    <div class="titles">AI - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 6/AI assingment 1.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <!-- <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a> -->
+    </div>
+</div>
+
+<!-- AI Notes PYQ  -->
+
+<div class="select1 notes69" id="notes69">
+    <div class="titles">AI - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+<!-- .NET what you want  -->
+
+<div class="select1 want24" id="want24">
+    <div class="titles">.NET - Select What You Want</div>
+    <div class="year">
+        <a href="#notes70"><div class="1"><p>Notes</p></div></a>
+        <a href="#notes71"><div class="2"><p>Assingment</p></div></a>
+        <a href="#notes72"><div class="3"><p>PYQ</p></div></a>
+    </div>
+</div>
+
+<!-- .NET Notes unit  -->
+
+<div class="select1 notes70" id="notes70">
+    <div class="titles">.NET - Notes - Select UNIT</div>
+    <div class="year">
+        <a href="./sem 6/MS.NET-309 -BCA6- -Unit-1.docx.pdf" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="./sem 6/MS.NET-309 -BCA6- -Unit-2.docx.pdf" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="./sem 6/MS.NET-309 -BCA6- -Unit-3.docx.pdf" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="./sem 6/MS.NET-309 -BCA6- -Unit-4.docx.pdf" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- .NET Notes Assingment  -->
+
+<div class="select1 notes71" id="notes71">
+    <div class="titles">.NET - Assingment - Select UNIT</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Unit - 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Unit - 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Unit - 4</p></div></a>
+    </div>
+</div>
+
+<!-- .NET Notes PYQ  -->
+
+<div class="select1 notes72" id="notes72">
+    <div class="titles">.NET - PYQ - Select Paper</div>
+    <div class="year">
+        <a href="" target="_blank"><div class="1"><p>Paper 1</p></div></a>
+        <a href="" target="_blank"><div class="2"><p>Paper 2</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 3</p></div></a>
+        <a href="" target="_blank"><div class="3"><p>Paper 4</p></div></a>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <div class="footers">
+        <div class="word"><a href="../../About/about.html">About us</a></div>
+        <div class="word"><a href="../../index.html#braches">Courses</a></div>
+        <div class="word"><a href="#">Assignments</a></div>
+        <div class="word"><a href="#">Contact us</a></div>
+    </div>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/2d559aadf4.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Simple show/hide navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show first year by default
+            showYear('1');
+            
+            // Handle navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        // Hide all sections first
+                        document.querySelectorAll('.select1').forEach(section => {
+                            section.style.display = 'none';
+                        });
+                        // Show the target section
+                        target.style.display = 'block';
+                        // Update URL hash
+                        window.location.hash = targetId;
+                    }
+                });
+            });
+        });
+
+        function showYear(year) {
+            // Hide all sections first
+            document.querySelectorAll('.select1').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show semesters for the selected year
+            const semesterElements = document.querySelectorAll(`.sem${year}`);
+            if (semesterElements.length > 0) {
+                semesterElements[0].style.display = 'block';
+            } else {
+                // Fallback for year 1 (sem1, sem2)
+                const fallbackId = year === '1' ? 'set1' : `set${(parseInt(year)-1)*2 + 1}`;
+                const fallbackElement = document.getElementById(fallbackId);
+                if (fallbackElement) {
+                    fallbackElement.style.display = 'block';
+                }
+            }
+        }
+        
+        const yearSemesterMap = {
+            '1': ['Semester 1', 'Semester 2'],
+            '2': ['Semester 3', 'Semester 4'],
+            '3': ['Semester 5', 'Semester 6']
+        };
+
+        // Subject configuration with content types and units
+        const subjectConfig = {
+            'Semester 1': {
+                'CPF': {
+                    notes: 4,  // 4 units of notes
+                    assignments: 2,  // 2 assignments
+                    pyq: true  // has PYQ papers
+                },
+                'PC': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                },
+                'Maths': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                },
+                'LOC-I': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                }
+            },
+            'Semester 2': {
+                'C Program': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true,
+                    path: 'sem 2/c',
+                    filePrefix: 'unit',
+                    assignmentPrefix: 'assignment',
+                    pyqFile: 'pyq.pdf'
+                },
+                'OS': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                },
+                'Maths': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                },
+                'CS (English)': {
+                    notes: 4,
+                    assignments: 2,
+                    pyq: true
+                }
+            }
+        };
+
+        // Function to generate subject list based on configuration
+        function getSubjectsForSemester(semester) {
+            const subjects = [];
+            const config = subjectConfig[semester] || {};
+            
+            for (const [subjectName, details] of Object.entries(config)) {
+                subjects.push({
+                    name: subjectName,
+                    path: `${semester.toLowerCase().replace(' ', '')}/${subjectName.toLowerCase().replace(' ', '')}`,
+                    ...details
+                });
+            }
+            
+            return subjects;
+        }
+
+        // Semester to Subject mapping
+        const semesterSubjectMap = {
+            'Semester 1': getSubjectsForSemester('Semester 1'),
+            'Semester 2': getSubjectsForSemester('Semester 2'),
+            'Semester 3': [],
+            'Semester 4': [],
+            'Semester 5': [],
+            'Semester 6': []
+        };
+
+        // DOM Elements
+        const yearSelection = document.getElementById('year-selection');
+        const semesterSelection = document.getElementById('semester-selection');
+        const subjectSelection = document.getElementById('subject-selection');
+        const semesterContainer = document.getElementById('semester-container');
+        const subjectContainer = document.getElementById('subject-container');
+        const subjectTitle = document.getElementById('subject-title');
+        const backToYears = document.getElementById('back-to-years');
+        const backToSemesters = document.getElementById('back-to-semesters');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show first year by default
+            showYear('1');
+            
+            // Handle existing hash-based navigation
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                if (hash.startsWith('want') || hash.startsWith('notes')) {
+                    // Scroll to the target element
+                    const target = document.getElementById(hash);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+            
+            // Add click handlers for all navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        window.location.hash = targetId;
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.year-option').forEach(option => {
+                option.addEventListener('click', () => showSemesters(option.dataset.year));
+            });
+
+            // Back button handlers
+            backToYears.addEventListener('click', () => {
+                semesterSelection.style.display = 'none';
+                yearSelection.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            backToSemesters.addEventListener('click', () => {
+                subjectSelection.style.display = 'none';
+                semesterSelection.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        function showSemesters(year) {
+            // Hide all sections first
+            document.querySelectorAll('.select1').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the selected year's semesters
+            const semesters = yearSemesterMap[year];
+            semesters.forEach((semester, index) => {
+                const semesterId = `sem${year}${index + 1}`;
+                const semesterElement = document.getElementById(semesterId);
+                if (semesterElement) {
+                    semesterElement.style.display = 'block';
+                } else {
+                    // Fallback to set1, set2, etc. if sem1, sem2, etc. not found
+                    const setElement = document.getElementById(`set${index + 1}`);
+                    if (setElement) {
+                        setElement.style.display = 'block';
+                    }
+                }
+            });
+            
+            // Scroll to the first visible semester
+            const firstVisible = document.querySelector('.select1[style*="display: block"]');
+            if (firstVisible) {
+                firstVisible.scrollIntoView({ behavior: 'smooth' });
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show subjects for selected semester
+        function showSubjects(semester) {
+            const subjects = semesterSubjectMap[semester];
+            subjectContainer.innerHTML = '';
+            subjectTitle.textContent = `${semester} - Select Subject`;
+            
+            subjects.forEach(subject => {
+                const subjectDiv = document.createElement('div');
+                subjectDiv.className = 'subject-option';
+                subjectDiv.innerHTML = `
+                    <p>${subject.name}</p>
+                    <div class="subject-actions">
+                        ${subject.notes ? '<span class="badge">Notes</span>' : ''}
+                        ${subject.assignments ? '<span class="badge">Assignments</span>' : ''}
+                        ${subject.pyq ? '<span class="badge">PYQ</span>' : ''}
+                    </div>
+                `;
+                
+                subjectDiv.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showContentTypes(subject, semester);
+                });
+                
+                subjectContainer.appendChild(subjectDiv);
+            });
+
+            // Add back button
+            const backButton = document.createElement('button');
+            backButton.className = 'back-button';
+            backButton.textContent = '← Back to Semesters';
+            backButton.onclick = () => {
+                subjectSelection.style.display = 'none';
+                semesterSelection.style.display = 'block';
+            };
+            subjectContainer.appendChild(backButton);
+
+            semesterSelection.style.display = 'none';
+            subjectSelection.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showContentTypes(subject, semester) {
+            subjectContainer.innerHTML = `
+                <h3>${subject.name}</h3>
+                <div class="content-types">
+                    ${subject.notes ? `
+                        <div class="content-type" data-type="notes">
+                            <h4>Notes</h4>
+                            <p>${subject.notes} units available</p>
+                        </div>
+                    ` : ''}
+                    ${subject.assignments ? `
+                        <div class="content-type" data-type="assignments">
+                            <h4>Assignments</h4>
+                            <p>${subject.assignments} assignments available</p>
+                        </div>
+                    ` : ''}
+                    ${subject.pyq ? `
+                        <div class="content-type" data-type="pyq">
+                            <h4>Previous Year Questions</h4>
+                            <p>Available</p>
+                        </div>
+                    ` : ''}
+                </div>
+                <button class="back-button" onclick="showSubjects('${semester}')">← Back to Subjects</button>
+            `;
+
+            // Add event listeners to content types
+            document.querySelectorAll('.content-type').forEach(type => {
+                type.addEventListener('click', () => {
+                    const contentType = type.dataset.type;
+                    showUnits(subject, semester, contentType);
+                });
+            });
+        }
+
+        function showUnits(subject, semester, contentType) {
+            let content = '';
+            const basePath = subject.path || `${semester.toLowerCase().replace(' ', '')}/${subject.name.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
+            
+            if (contentType === 'notes' && subject.notes) {
+                const prefix = subject.filePrefix || 'unit';
+                content = Array.from({length: subject.notes}, (_, i) => 
+                    `<a href="${basePath} ${prefix} ${i+1}.pdf" target="_blank" class="unit">Unit ${i+1}</a>`
+                ).join('');
+            } else if (contentType === 'assignments' && subject.assignments) {
+                const prefix = subject.assignmentPrefix || 'assignment';
+                content = Array.from({length: subject.assignments}, (_, i) => 
+                    `<a href="${basePath} ${prefix} ${i+1}.pdf" target="_blank" class="unit">Assignment ${i+1}</a>`
+                ).join('');
+            } else if (contentType === 'pyq' && subject.pyq) {
+                const pyqFile = subject.pyqFile || 'pyq.pdf';
+                content = `<a href="${basePath} ${pyqFile}" target="_blank" class="unit">Previous Year Questions</a>`;
+            }
+
+            subjectContainer.innerHTML = `
+                <h3>${subject.name} - ${contentType.charAt(0).toUpperCase() + contentType.slice(1)}</h3>
+                <div class="units-container">
+                    ${content || 'No content available'}
+                </div>
+                <button class="back-button" onclick="showContentTypes(${JSON.stringify(subject)}, '${semester}')">← Back to Content Types</button>
+            `;
+        }
+    </script>
+</body>
+</html>
