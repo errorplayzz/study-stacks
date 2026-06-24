@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STUDY STACKS - BCA</title>
-    <link rel="stylesheet" href="./bca.css">
+    <link rel="stylesheet" href="./bca.css?v=1.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -1289,6 +1289,86 @@
         <div class="word"><a href="#">Contact us</a></div>
     </div>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.select1');
+            const firstSectionId = 'set1';
+            let navHistory = [];
 
+            // Hide all sections except the first one or target hash on load
+            const initialHash = window.location.hash.substring(1);
+            let initialSection = initialHash ? document.getElementById(initialHash) : null;
+            if (!initialSection || !initialSection.classList.contains('select1')) {
+                initialSection = document.getElementById(firstSectionId);
+            }
+
+            sections.forEach(section => {
+                if (section !== initialSection) {
+                    section.style.display = 'none';
+                }
+            });
+
+            if (initialSection && initialSection.id !== firstSectionId) {
+                navHistory.push(firstSectionId);
+            }
+
+            // Setup Back buttons
+            sections.forEach(section => {
+                if (section.id === firstSectionId) return;
+
+                const titlesEl = section.querySelector('.titles');
+                if (titlesEl) {
+                    const backBtn = document.createElement('button');
+                    backBtn.className = 'back-button';
+                    backBtn.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Back';
+                    backBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (navHistory.length > 0) {
+                            const prevId = navHistory.pop();
+                            const prevSection = document.getElementById(prevId);
+                            if (prevSection) {
+                                section.style.display = 'none';
+                                prevSection.style.display = 'block';
+                                prevSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                // Update URL hash cleanly
+                                history.pushState(null, null, '#' + prevId);
+                            }
+                        } else {
+                            // Default fallback back to main Year selection
+                            const prevSection = document.getElementById(firstSectionId);
+                            if (prevSection) {
+                                section.style.display = 'none';
+                                prevSection.style.display = 'block';
+                                history.pushState(null, null, '#' + firstSectionId);
+                            }
+                        }
+                    });
+                    titlesEl.prepend(backBtn);
+                }
+            });
+
+            // Intercept link clicks inside selection containers
+            document.querySelectorAll('.select1 a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // Only intercept if the target is another .select1 container
+                    if (targetSection && targetSection.classList.contains('select1')) {
+                        e.preventDefault();
+                        const currentSection = this.closest('.select1');
+                        if (currentSection) {
+                            currentSection.style.display = 'none';
+                            navHistory.push(currentSection.id);
+                            targetSection.style.display = 'block';
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            // Update URL hash cleanly
+                            history.pushState(null, null, '#' + targetId);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
