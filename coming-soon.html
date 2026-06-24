@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDY STACKS - Coming Soon</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.6)),
+                              url('./background image.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ── Navbar ── */
+        .navigationbar {
+            height: 70px;
+            width: 100%;
+            background-color: #31363f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+        }
+
+        .navigationbar .firstnav {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .navigationbar .firstnav img {
+            height: 50px;
+        }
+
+        .navigationbar .secondnav {
+            display: flex;
+            margin-right: 30px;
+            gap: 5px;
+        }
+
+        .navigationbar .secondnav a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        .navigationbar .secondnav a i {
+            margin-right: 6px;
+        }
+
+        .navigationbar .secondnav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* ── Main Content ── */
+        .coming-soon-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        .coming-soon-card {
+            text-align: center;
+            padding: 60px 50px;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        /* Animated clock icon */
+        .clock-icon {
+            font-size: 80px;
+            color: #3498db;
+            margin-bottom: 30px;
+            display: block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .coming-soon-card h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #3498db, #9b59b6, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .coming-soon-card .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Progress bar decoration */
+        .progress-bar-wrapper {
+            width: 320px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto 48px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 40%;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 10px;
+            animation: progressMove 2.5s ease-in-out infinite alternate;
+        }
+
+        /* Back button */
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(52, 152, 219, 0.15);
+            border: 2px solid rgba(52, 152, 219, 0.5);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-home-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            background: rgba(52, 152, 219, 0.35);
+            border-color: #3498db;
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .back-home-btn:hover i {
+            transform: translateX(-4px);
+        }
+
+        .back-home-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes progressMove {
+            from { margin-left: 0; }
+            to   { margin-left: 60%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .coming-soon-card { padding: 40px 20px; }
+            .progress-bar-wrapper { width: 220px; }
+            .navigationbar .secondnav a { font-size: 13px; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navigationbar">
+        <div class="firstnav">
+            <div class="image">
+                <a href="./index.html">
+                    <img src="./study_stacks_3__1_-removebg-preview.png" alt="STUDY STACKS">
+                </a>
+            </div>
+        </div>
+        <div class="secondnav">
+            <div class="courseh"><a href="./index.html#braches"><i class="fa-solid fa-magnifying-glass"></i>Course</a></div>
+            <div class="procourseh"><a href="./index.html#probraches"><i class="fa-solid fa-code"></i>Coding Course</a></div>
+            <div class="assingment"><a href="./login form/login.html"><i class="fa-solid fa-right-to-bracket"></i>Login</a></div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Content -->
+    <div class="coming-soon-wrapper">
+        <div class="coming-soon-card">
+            <i class="fa-solid fa-clock-rotate-left clock-icon"></i>
+            <h1>Coming Soon</h1>
+            <p class="subtitle">
+                We're working hard to bring you this course page.<br>
+                Check back soon — great things are on the way!
+            </p>
+
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill"></div>
+            </div>
+
+            <a href="./index.html#braches" class="back-home-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Courses
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
