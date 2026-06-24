@@ -1,0 +1,470 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes borderGlow {
+    0% { box-shadow: 0 0 10px rgba(0, 47, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 47, 255, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(0, 47, 255, 0.5); }
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(../../background\ image.avif);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* navigation bar */
+
+.navigationbar{
+  height: 70px;
+  width: 100%;
+  background-color: #31363f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navigationbar .firstnav{
+  display: flex;
+  margin-left: 10px;
+}
+
+.navigationbar .firstnav img{
+  height: 50px;
+  margin-right: 0px;
+  transition: all 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.navigationbar .firstnav img:hover {
+  transform: scale(1.1);
+}
+
+.navigationbar .secondnav{
+  display: flex;
+  margin-right: 30px;
+}
+
+.navigationbar .secondnav a{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 90em;
+  margin: 10px 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.navigationbar .secondnav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #3498db, #2ecc71);
+  transition: width 0.3s ease;
+}
+
+.navigationbar .secondnav a:hover::after {
+  width: 100%;
+}
+
+.navigationbar .secondnav div a i{
+  color: white;
+  margin-right: 5px;
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+
+.navigationbar .secondnav a:hover{
+  background-color: rgba(255, 255, 255, 0.389);
+  transform: translateY(-3px);
+  animation: ease-in-out;
+  animation-duration: 0.5s;
+}
+
+.navigationbar .secondnav a:hover i {
+  transform: scale(1.2);
+}
+
+/* main container */
+
+.main{
+    margin-top: 100px;
+    font-size: 50px;
+    text-align: center;
+    font-family: cursive;
+    font-weight: 700;
+    background: linear-gradient(45deg, #3498db, #9b59b6, #2ecc71);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeInDown 1.2s ease, gradientMove 10s ease infinite;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.main::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(to right, #3498db, #9b59b6, #2ecc71);
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.select1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 5%;
+  margin-top: 60px;
+  overflow-x: auto;
+  max-width: 100%;
+  animation: fadeInUp 1s ease;
+}
+
+.select1 .titles {
+  margin-top: 0;
+  margin-right: 30px;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  animation: fadeIn 1.5s ease;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  flex: 0 0 300px;
+  position: relative;
+}
+
+.select1 .titles::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #3498db, #9b59b6);
+  bottom: -10px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.select1 .year {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+}
+
+.select1 .year div{
+    height: 150px;
+    width: 200px;
+    border: solid black 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(../button\ wallpaper.jpg);
+    background-size: cover;
+    background-position: center;
+    border: none;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1.2s ease;
+}
+
+.select1 .year div:hover{
+    height: 160px;
+    width: 210px;
+}
+
+.select1 .year a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.select1 .year a p{
+  font-family: cursive;
+  font-size: 30px;
+}
+
+.year-card {
+    background: transparent;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.year-card:hover {
+    transform: translateY(-5px);
+}
+
+.year-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.year-card p {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.year {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+}
+
+.year a {
+    text-decoration: none;
+}
+
+.select1 .year {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  flex: 1;
+}
+
+.select1 .year div {
+  height: 120px;
+  width: 170px;
+  flex: 0 0 auto;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(../../button\ wallpaper.jpg);
+  background-size: cover;
+  background-position: center;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 1.2s ease;
+}
+
+.select2, .select3, .select4,
+.sem1, .sem2, .sem3, .sem4, .sem5, .sem6 {
+  padding-top: 60px;
+}
+
+.want1, .want2, .want3, .want4, .want5, .want6, .want7, .want8,
+.want9, .want10, .want11, .want12, .want13, .want14, .want15, .want16,
+.want17, .want18, .want19, .want20, .want21, .want22, .want23, .want24 {
+  padding-top: 60px;
+}
+
+.notes1, .notes2, .notes3, .notes4, .notes5, .notes6, .notes7, .notes8,
+.notes9, .notes10, .notes11, .notes12, .notes13, .notes14, .notes15, .notes16,
+.notes17, .notes18, .notes19, .notes20, .notes21, .notes22, .notes23, .notes24,
+.notes25, .notes26, .notes27, .notes28, .notes29, .notes30, .notes31, .notes32,
+.notes33, .notes34, .notes35, .notes36, .notes37, .notes38, .notes39, .notes40,
+.notes41, .notes42, .notes43, .notes44, .notes45, .notes46, .notes47, .notes48,
+.notes49, .notes50, .notes51, .notes52, .notes53, .notes54, .notes55, .notes56,
+.notes57, .notes58, .notes59, .notes60, .notes61, .notes62, .notes63, .notes64,
+.notes65, .notes66, .notes67, .notes68, .notes69, .notes70, .notes71, .notes72 {
+  padding-top: 60px;
+}
+
+/* For better mobile experience */
+@media screen and (max-width: 768px) {
+  .select1 {
+    flex-direction: column;
+    padding: 20px 5%;
+  }
+  
+  .select1 .titles {
+    margin-bottom: 30px;
+    text-align: center;
+    flex: none;
+    width: 100%;
+  }
+  
+  .select1 .titles::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .select1 .year {
+    justify-content: center;
+  }
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+  .navigationbar {
+    height: auto;
+    flex-direction: column;
+    padding: 10px 0;
+  }
+  
+  .navigationbar .secondnav {
+    margin-right: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .main {
+    font-size: 36px;
+    margin-top: 150px;
+  }
+  
+  .select1 .titles {
+    font-size: 24px;
+  }
+  
+  .select1 .year {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .select1 .year div {
+    margin-bottom: 20px;
+  }
+}
+
+/* footer  */
+
+.footers{
+    display: flex;
+    background-color: grey;
+    height: 80px;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0;
+  }
+  .footers .word a{
+    color: white;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+  }
